@@ -1,80 +1,78 @@
-🔭 Gamma vs. Hadron Particle Classification
-Hey there! 👋
-This project is all about classifying high-energy particles detected by the MAGIC gamma-ray telescope. Basically, we’re trying to figure out if a particle is a gamma ray or a hadron based on a bunch of numeric measurements.
+# 🔭 Gamma vs. Hadron Particle Classification
 
-🧠 What’s This All About?
-Telescope data gives us 10 features per event — like size, width, asymmetry — and our job is to predict whether that event was caused by a gamma ray or a hadron.
-Why? Because identifying gamma rays helps astrophysicists explore crazy cosmic phenomena like black holes and pulsars 🌌.
+This project focuses on classifying high-energy particles detected by the **MAGIC gamma-ray telescope**. Using a dataset of particle events, we apply several machine learning models to predict whether each event was caused by a **gamma ray** or a **hadron**.
 
-🧰 Tools & Libraries I Used
-Python + Pandas, NumPy – for data loading and wrangling
+---
 
-Matplotlib & Seaborn – for visualization
+## 🧠 Project Goal
 
-Scikit-learn – for training ML models
+To build a machine learning classifier that can distinguish between **gamma ray** and **hadron** events based on telescope data.
 
-imblearn – to handle class imbalance
+---
 
-Models used:
+## 🗃️ Dataset Overview
 
-K-Nearest Neighbors
+- **Source:** telescope_data.csv
+- **Rows:** ~19,000 particle events
+- **Features (10):**
+  - `fLength`, `fWidth`, `fSize`, `fConc`, `fConc1`
+  - `fAsym`, `fM3Long`, `fM3Trans`, `fAlpha`, `fDist`
+- **Target:**
+  - `class` → 0 = Gamma, 1 = Hadron
 
-Logistic Regression
+---
 
-Naive Bayes
+## 📦 Libraries Used
 
-Support Vector Machine (SVM)
+- `numpy`, `pandas` – data manipulation
+- `matplotlib`, `seaborn` – data visualization
+- `scikit-learn` – model training and evaluation
+- `imblearn` – for handling class imbalance (oversampling)
 
-🔍 Quick Look at the Data
-The dataset has ~19,000 rows.
+---
 
-Each row is a particle event with 10 features.
+## 📊 Exploratory Data Analysis
 
-The class column is the target:
+- Correlation heatmap to understand relationships between features.
+- Histograms to visualize how features differ by class (Gamma vs. Hadron).
+- Class imbalance observed → addressed with **RandomOverSampler**.
 
-0 = Gamma
+---
 
-1 = Hadron
+## 🧪 Preprocessing
 
-Note: Hadron events are fewer than gamma events, so we used oversampling to balance them out.
+1. Encode the `class` label using `OrdinalEncoder`.
+2. Split data into Train (60%), Validation (20%), Test (20%).
+3. Normalize feature values using `StandardScaler`.
+4. Apply **oversampling** on the training set only.
 
-📊 EDA Highlights
-Used a heatmap to check feature correlation.
+---
 
-Plotted histograms to see how each feature differs between gamma and hadron.
+## 🏋️ Model Training & Evaluation
 
-Found that some features like fAlpha, fDist, and fConc1 vary noticeably between classes.
+Trained and evaluated the following models:
 
-🏋️ Model Training
-I split the dataset into:
+| Model               | Accuracy | F1 Score (Hadron) | Notes                            |
+|---------------------|----------|-------------------|----------------------------------|
+| **K-Nearest Neighbors (K=3)** | 81% | 0.73 | Simple, performs decently |
+| **Naive Bayes**      | 74% | 0.52 | Struggles with Hadron class |
+| **Logistic Regression** | 80% | 0.72 | Balanced and interpretable |
+| **Support Vector Machine (SVM)** | **87%** | **0.81** | ⭐ Best performer |
 
-60% for training
+---
 
-20% for validation
+## 🧠 Key Insights
 
-20% for testing
+- **SVM outperformed** other models with an 87% accuracy and balanced classification of both classes.
+- **Class imbalance** significantly impacted performance until oversampling was applied.
+- Simple preprocessing steps (scaling, encoding) had a big impact on model performance.
 
-Before training:
+---
 
-Scaled all the features
+## 🛠️ How to Run
 
-Applied oversampling only on the training set to fix class imbalance
-
-🧪 Results
-Here's how each model did on the validation set:
-
-Model	Accuracy	F1 Score (Hadron)	Comments
-KNN (k=3)	81%	0.73	Solid, but slower and not great for large data
-Naive Bayes	74%	0.52	Not great with this data – poor recall on Hadron
-Logistic Regression	80%	0.72	Balanced and easy to interpret
-SVM	87%	0.81	Best overall performance ⭐️
-
-🎯 Key Takeaways
-Support Vector Machine (SVM) was the best model in this case.
-
-Naive Bayes struggled, especially with correctly identifying hadrons.
-
-Balancing the data with oversampling made a big difference.
-
-Good preprocessing (scaling, encoding, splitting right) is half the battle in ML.
-
+1. Clone the repo or download the code.
+2. Place `telescope_data.csv` in the same directory.
+3. Install dependencies:
+   ```bash
+   pip install numpy pandas matplotlib seaborn scikit-learn imbalanced-learn
