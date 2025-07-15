@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 
 # Load the dataset
-data = pd.read_csv('dataset/Noisy_Student_Bag_Price_Prediction_Dataset.csv')
+data = pd.read_csv('Noisy_Student_Bag_Price_Prediction_Dataset.csv')
 
 # Drop duplicate rows and reset the index
 data = data.drop_duplicates().reset_index(drop=True)
