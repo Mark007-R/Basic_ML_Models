@@ -52,12 +52,3 @@ Only the **numeric and demographic features** were used for prediction.
 Models were trained and tuned using **GridSearchCV** with `neg_mean_squared_error` as the scoring metric.
 
 ---
-
-## 🧪 Preprocessing
-
-1. Removed unnecessary columns:
-   ```python
-   zip_codes_df = top_5_zip_codes_df.drop([
-       'Latte Price', 'Business Name', 'Street address', 'City',
-       'State', 'Phone', 'Gender majority', 'ID no.'
-   ], axis=1)
