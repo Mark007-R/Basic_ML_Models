@@ -55,6 +55,19 @@ This repository contains multiple ML projects demonstrating common techniques an
 
 ---
 
+## 6. Business Latte Price Prediction  
+- Data Cleaning (Dropping irrelevant columns like Business Name, Address, Phone, etc.)  
+- Feature Selection (Zip Code, Average Income, Population, Gender-wise Population)  
+- Feature Scaling using StandardScaler  
+- Supervised Learning (Regression Problem)  
+- Linear Regression  
+- Random Forest Regressor  
+- XGBoost Regressor  
+- Hyperparameter Tuning using GridSearchCV  
+- Model Evaluation (Negative Mean Squared Error, Predictions on Top 5 Zip Codes)  
+
+---
+
 ## Common Concepts Across Projects  
 - Data Cleaning & Preprocessing  
 - Missing Value Imputation (Simple, KNN, Mode)  
