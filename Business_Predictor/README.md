@@ -1,71 +1,63 @@
-# 📊 Coffee Shop Latte Price Prediction (Random Forest & Gradient Boosting)
+# ☕ Latte Price Prediction in Top 5 Zip Codes
 
-This project predicts **latte prices** based on business, demographic, and competitive factors. The goal is to identify the most profitable zip codes for opening new coffee shops by analyzing factors such as population, existing shop count, customer ratings, and income levels.
+This project predicts latte prices in the top 5 zip codes using various machine learning regression models. The prediction is based on features like average income, population, and gender demographics per zip code.
 
 ---
 
 ## 🎯 Objective
 
-- Predict **latte prices** using regression models
-- Identify **top zip codes** to target for new shop expansion using:
-  - High population
-  - Low coffee shop competition
-  - Low average ratings
-  - High median salary
+- Predict the price of a latte in different zip codes.
+- Use regression models such as Linear Regression, Random Forest Regressor, and XGBoost Regressor.
+- Apply predictions to the top 5 zip codes based on the dataset.
 
 ---
 
-## 🧾 Datasets
+## 🛠️ Tech Stack
 
-### 1. `CH_2_Coffee Shop data.xlsx`
-- Coffee shop details like:
-  - `Business Name`, `City`, `Zip Code`
-  - `Rating`, `Gender Majority`, `Median Salary`, `Latte Price`
-
-### 2. `population.csv`
-- Zip code level demographic data including:
-  - `Total Population`
-  - `Household Distribution`
+- Python 3.12
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- Matplotlib / Seaborn (optional for visualization)
 
 ---
 
-## ⚙️ Preprocessing
+## 📁 Dataset Features
 
-1. **Join Datasets**
-   - Merge coffee shop and population data on 5-digit zip codes
-2. **Feature Engineering**
-   - Calculate `CoffeeShopCount` per zip code
-   - Select features: `Rating`, `Median Salary`, `Population`, `CoffeeShopCount`
-3. **Scaling**
-   - Apply `StandardScaler` to input features
-4. **Train-Test Split**
-   - 80% training / 20% testing (`random_state=42`)
+| Column Name         | Description                                |
+|---------------------|--------------------------------------------|
+| `Latte Price`       | Target variable (float)                    |
+| `Zip Code`          | Numeric zip code of the location           |
+| `Average Income`    | Avg. income in the zip code area           |
+| `Population`        | Total population of the area               |
+| `Male Population`   | Male population                            |
+| `Female Population` | Female population                          |
+| `Business Name`     | Name of the coffee business (ignored)      |
+| `Street address`    | Address (ignored)                          |
+| `City`, `State`     | City and State (ignored)                   |
+| `Phone`, `ID no.`   | Metadata (ignored)                         |
+| `Gender majority`   | Gender dominance in area (ignored)         |
+
+Only the **numeric and demographic features** were used for prediction.
 
 ---
 
 ## 🧠 Models Used
 
-### 1. 🌲 Random Forest Regressor
-- `n_estimators`: Tuned via GridSearchCV (50, 100, 200)
-- `max_depth`: [None, 10, 20]
+- Linear Regression
+- Random Forest Regressor
+- XGBoost Regressor
 
-### 2. 🚀 Gradient Boosting Regressor
-- `n_estimators`: [50, 100, 200]
-- `learning_rate`: [0.01, 0.1, 0.2]
-- `max_depth`: [3, 5, 10]
-
-### 3. 📈 Linear Regression
-- Used for baseline comparison
+Models were trained and tuned using **GridSearchCV** with `neg_mean_squared_error` as the scoring metric.
 
 ---
 
-## 📐 Evaluation Metrics
+## 🧪 Preprocessing
 
-- **Mean Absolute Error (MAE)**  
-- **Mean Squared Error (MSE)**  
-- **R² Score**  
-
----
-
-## 🧪 Results
-
+1. Removed unnecessary columns:
+   ```python
+   zip_codes_df = top_5_zip_codes_df.drop([
+       'Latte Price', 'Business Name', 'Street address', 'City',
+       'State', 'Phone', 'Gender majority', 'ID no.'
+   ], axis=1)
