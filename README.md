@@ -68,6 +68,16 @@ This repository contains multiple ML projects demonstrating common techniques an
 
 ---
 
+## 7. Breast Cancer Diagnosis
+- Data Cleaning
+- Feature Scaling (StandardScaler)
+- Feature Analysis (Correlation Heatmap)
+- Supervised Learning (Classification)
+- Logistic Regression Classifier
+- Hyperparameter Tuning (GridSearchCV)
+- Model Evaluation (Accuracy, F1 Score, Cross-Validation)
+---
+
 ## Common Concepts Across Projects  
 - Data Cleaning & Preprocessing  
 - Missing Value Imputation (Simple, KNN, Mode)  
