@@ -23,6 +23,7 @@ numpy
 scikit-learn
 matplotlib
 seaborn
+```
 
 ## 📈 Exploratory Data Analysis
 
